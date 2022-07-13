@@ -25,7 +25,7 @@ namespace View
         private void languageChange_click(object sender, EventArgs e)
         {
             Language language =(Language)((ToolStripMenuItem)sender).Tag;
-            Session.GetInstance.language = languageService.GetLanguage(language.Key);
+            Session.GetInstance.language = languageService.GetLanguage(language.Name);
 
             this.lblUsuario.Text = language.Name;
         }
@@ -80,12 +80,26 @@ namespace View
 
         private void SeguridadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            createForm(typeof(frmPatentesFamilias));
+            if (Session.GetInstance.IsInRole(PermissionsEnum.PatentesFamilias))
+            {
+                createForm(typeof(frmPatentesFamilias));
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
+        
         }
-
         private void UsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            createForm(typeof(frmUsuarios));
+            if (Session.GetInstance.IsInRole(PermissionsEnum.PatentesUsuarios))
+            {
+                createForm(typeof(frmUsuarios));
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
         }
 
         private void FormNuevoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,9 +201,16 @@ namespace View
 
         private void ingresosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new frmIngresos();
-            frm.MdiParent = this;
-            frm.Show();
+            if (Session.GetInstance.IsInRole(PermissionsEnum.IngresarMaquina))
+            {
+                Form frm = new frmIngresos();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
         }
 
         private void controlToolStripMenuItem_Click(object sender, EventArgs e)
@@ -216,28 +237,66 @@ namespace View
 
         private void reparacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new frmReparaciones();
-            frm.MdiParent = this;
-            frm.Show();
+            if (Session.GetInstance.IsInRole(PermissionsEnum.Presupuestar))
+            {
+                Form frm = new frmReparaciones();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
+          
         }
 
         private void aprobacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new Approvals();
-            frm.MdiParent = this;
-            frm.Show();
+            if (Session.GetInstance.IsInRole(PermissionsEnum.AprobarMaquina))
+            {
+                Form frm = new Approvals();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
         }
 
         private void idiomasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new frmLanguage();
-            frm.MdiParent = this;
-            frm.Show();
-        }
+            if (Session.GetInstance.IsInRole(PermissionsEnum.ModificarIdiomas))
+            {
+                Form frm = new frmLanguage();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
 
+        }
         private void maquinasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dAsignacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = new Asignaciones();
+            frm.MdiParent = this;
+            frm.Show();
+
+            if (Session.GetInstance.IsInRole(PermissionsEnum.ModificarIdiomas))
+            {
+               
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
         }
     }
 } 

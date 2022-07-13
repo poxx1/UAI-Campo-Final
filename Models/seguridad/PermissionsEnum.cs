@@ -9,19 +9,23 @@ namespace Models
     public enum PermissionsEnum
     {
         //para cada uno debe existir un registro en BD
+        PuedeHacerD,
+        PuedeHacerE,
+        PuedeHacerF,
+        PuedeHacerG,
+        //Las que necesito ahora
         Default,
         Patentes,
         MenuConfig,
         PatentesFamilias,
-        VerRutina,
         PatentesUsuarios,
         Usuarios,
-        PuedeHacerD,
-        PuedeHacerE,
-        PuedeHacerF,
-        PuedeHacerG
+        //Especificas
+        Todo,
+        AprobarMaquina,
+        Presupuestar,
+        Reparar,
+        IngresarMaquina,
+        ModificarIdiomas
     }
-
-    
-   
 }

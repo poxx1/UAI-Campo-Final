@@ -186,7 +186,8 @@ namespace DataAccess
                     Adress = reader.GetValue(reader.GetOrdinal("direccion")).ToString(),
                     Phone = reader.GetValue(reader.GetOrdinal("telefono")).ToString(),
                     Dni = reader.GetValue(reader.GetOrdinal("dni")).ToString(),
-                    isBlocked = reader.GetBoolean(reader.GetOrdinal("isBlocked"))
+                    isBlocked = reader.GetBoolean(reader.GetOrdinal("isBlocked")),
+                    isReparador = reader.GetBoolean(reader.GetOrdinal("isReparador"))
                 };
                 lista.Add(user);
             }

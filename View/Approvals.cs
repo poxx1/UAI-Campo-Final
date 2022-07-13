@@ -60,7 +60,9 @@ namespace View
             MachinesService ms = new MachinesService();
             comboBox1.DataSource = null;
             comboBox1.DataSource = ms.GetAll();
-            comboBox1.DisplayMember = getCurrent().Id_Machine.ToString();
+            comboBox1.DisplayMember = "Id_Machine";
+
+//            comboBox1.DisplayMember = getCurrent().Id_Machine.ToString();
         }
 
         private Machines getCurrent()

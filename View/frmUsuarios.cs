@@ -61,6 +61,7 @@ namespace View
             user.Password = ((User)this.cboUsuarios.SelectedItem).Password;*/
 
             user = ((User)this.cboUsuarios.SelectedItem);
+            cboUsuarios.DisplayMember = "Name";
             permissionsService.FillUserComponents(user);
 
             MostrarPermisos(user);
@@ -141,6 +142,7 @@ namespace View
             userService = new UserService();
             permissionsService = new PermissionsService();
             this.cboUsuarios.DataSource = userService.GetAll();
+            cboUsuarios.DisplayMember = "Name";
 
             eliminarFamiliaBtn.Enabled = false;
             agregarFamiliaBtn.Enabled = false;
@@ -229,6 +231,11 @@ namespace View
         private void resetPasswordBtn_Click(object sender, EventArgs e)
         {
             userService.ResetPassword(user);
+        }
+
+        private void cboUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

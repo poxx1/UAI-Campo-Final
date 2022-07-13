@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Models
 {
     public class Session : ILanguageObserbable
@@ -29,6 +28,11 @@ namespace Models
                 _language = value;
                 notifyObserbers(_language);
             }
+        }
+
+        public Language GetLanguage()
+        {
+            return _language;
         }
 
         public static Session GetInstance

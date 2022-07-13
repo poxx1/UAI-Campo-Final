@@ -87,9 +87,11 @@ namespace DataAccess
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                Machines machine = new Machines();
+                //Machines machine = new Machines();
                 while (reader.Read())
                 {
+                    Machines machine = new Machines();
+
                     machine.Id_Machine = Int32.Parse(reader.GetString(reader.GetOrdinal("Id_Machine")));
                     machine.Description = reader.GetString(reader.GetOrdinal("Description"));
                     machine.Color = reader.GetString(reader.GetOrdinal("Id_Color"));

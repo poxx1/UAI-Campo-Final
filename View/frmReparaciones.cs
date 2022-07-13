@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Models;
@@ -56,15 +49,17 @@ namespace View
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-        
+            richTextBox1.Text = getCurrent().Reparation.ToString();
         }
-
         private void cargarMaquinas()
         {
             MachinesService ms = new MachinesService();
             comboBox1.DataSource = null;
             comboBox1.DataSource = ms.GetAll();
-            comboBox1.Text = getCurrent().Id_Machine.ToString();
+            comboBox1.DisplayMember = "Id_Machine";
+            richTextBox1.Text = getCurrent().Reparation.ToString(); 
+
+            //comboBox1.Text = getCurrent().Id_Machine.ToString();
         }
 
         private Machines getCurrent()
@@ -104,5 +99,15 @@ namespace View
             }
         }
         #endregion
+
+        private void frmReparaciones_Load(object sender, EventArgs e)
+        {   
+            updateLanguage(Session.GetInstance.GetLanguage());
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

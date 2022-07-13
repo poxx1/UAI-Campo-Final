@@ -34,6 +34,11 @@
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.idiomasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.maquinasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingresosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reparacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aprob = new System.Windows.Forms.ToolStripMenuItem();
+            this.salir03 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectIdioma = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEjemplo = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuA = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,13 +47,9 @@
             this.mnuD = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuE = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuG = new System.Windows.Forms.ToolStripMenuItem();
-            this.maquinasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingresosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reparacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aprob = new System.Windows.Forms.ToolStripMenuItem();
-            this.salir03 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.dAsignacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +70,7 @@
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.usuariosToolStripMenuItem.Tag = "usuarios1A";
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.UsuariosToolStripMenuItem_Click);
@@ -77,7 +78,7 @@
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.Name = "seguridadToolStripMenuItem";
-            this.seguridadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.seguridadToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.seguridadToolStripMenuItem.Tag = "patentesyfamilias1B";
             this.seguridadToolStripMenuItem.Text = "Patentes y Familias";
             this.seguridadToolStripMenuItem.Click += new System.EventHandler(this.SeguridadToolStripMenuItem_Click);
@@ -85,7 +86,7 @@
             // idiomasToolStripMenuItem
             // 
             this.idiomasToolStripMenuItem.Name = "idiomasToolStripMenuItem";
-            this.idiomasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.idiomasToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.idiomasToolStripMenuItem.Tag = "idiomas1C";
             this.idiomasToolStripMenuItem.Text = "Idiomas";
             this.idiomasToolStripMenuItem.Click += new System.EventHandler(this.idiomasToolStripMenuItem_Click);
@@ -106,69 +107,13 @@
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
-            // mnuSelectIdioma
-            // 
-            this.mnuSelectIdioma.Name = "mnuSelectIdioma";
-            this.mnuSelectIdioma.Size = new System.Drawing.Size(119, 20);
-            this.mnuSelectIdioma.Text = "Seleccionar Idioma";
-            this.mnuSelectIdioma.Click += new System.EventHandler(this.mnuSelectIdioma_Click);
-            // 
-            // mnuEjemplo
-            // 
-            this.mnuEjemplo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuA,
-            this.mnuB,
-            this.mnuC,
-            this.mnuD,
-            this.mnuE,
-            this.mnuG});
-            this.mnuEjemplo.Name = "mnuEjemplo";
-            this.mnuEjemplo.Size = new System.Drawing.Size(96, 20);
-            this.mnuEjemplo.Text = "Menu ejemplo";
-            this.mnuEjemplo.Click += new System.EventHandler(this.mnuEjemplo_Click);
-            // 
-            // mnuA
-            // 
-            this.mnuA.Name = "mnuA";
-            this.mnuA.Size = new System.Drawing.Size(180, 22);
-            this.mnuA.Text = "Puede hacer A";
-            // 
-            // mnuB
-            // 
-            this.mnuB.Name = "mnuB";
-            this.mnuB.Size = new System.Drawing.Size(180, 22);
-            this.mnuB.Text = "Puede hacer B";
-            // 
-            // mnuC
-            // 
-            this.mnuC.Name = "mnuC";
-            this.mnuC.Size = new System.Drawing.Size(180, 22);
-            this.mnuC.Text = "Puede hacer C";
-            // 
-            // mnuD
-            // 
-            this.mnuD.Name = "mnuD";
-            this.mnuD.Size = new System.Drawing.Size(180, 22);
-            this.mnuD.Text = "Puede hacer D";
-            // 
-            // mnuE
-            // 
-            this.mnuE.Name = "mnuE";
-            this.mnuE.Size = new System.Drawing.Size(180, 22);
-            this.mnuE.Text = "Puede hacer E";
-            // 
-            // mnuG
-            // 
-            this.mnuG.Name = "mnuG";
-            this.mnuG.Size = new System.Drawing.Size(180, 22);
-            this.mnuG.Text = "Puede hacer G";
-            // 
             // maquinasToolStripMenuItem
             // 
             this.maquinasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ingresosToolStripMenuItem,
             this.reparacionesToolStripMenuItem,
-            this.aprob});
+            this.aprob,
+            this.dAsignacionesToolStripMenuItem});
             this.maquinasToolStripMenuItem.Name = "maquinasToolStripMenuItem";
             this.maquinasToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.maquinasToolStripMenuItem.Text = "2. Maquinas";
@@ -206,6 +151,63 @@
             this.salir03.Text = "3. Salir";
             this.salir03.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
+            // mnuSelectIdioma
+            // 
+            this.mnuSelectIdioma.Name = "mnuSelectIdioma";
+            this.mnuSelectIdioma.Size = new System.Drawing.Size(119, 20);
+            this.mnuSelectIdioma.Text = "Seleccionar Idioma";
+            this.mnuSelectIdioma.Click += new System.EventHandler(this.mnuSelectIdioma_Click);
+            // 
+            // mnuEjemplo
+            // 
+            this.mnuEjemplo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuA,
+            this.mnuB,
+            this.mnuC,
+            this.mnuD,
+            this.mnuE,
+            this.mnuG});
+            this.mnuEjemplo.Name = "mnuEjemplo";
+            this.mnuEjemplo.Size = new System.Drawing.Size(96, 20);
+            this.mnuEjemplo.Text = "Menu ejemplo";
+            this.mnuEjemplo.Click += new System.EventHandler(this.mnuEjemplo_Click);
+            // 
+            // mnuA
+            // 
+            this.mnuA.Name = "mnuA";
+            this.mnuA.Size = new System.Drawing.Size(150, 22);
+            this.mnuA.Text = "Puede hacer A";
+            // 
+            // mnuB
+            // 
+            this.mnuB.Name = "mnuB";
+            this.mnuB.Size = new System.Drawing.Size(150, 22);
+            this.mnuB.Text = "Puede hacer B";
+            // 
+            // mnuC
+            // 
+            this.mnuC.Name = "mnuC";
+            this.mnuC.Size = new System.Drawing.Size(150, 22);
+            this.mnuC.Text = "Puede hacer C";
+            // 
+            // mnuD
+            // 
+            this.mnuD.Name = "mnuD";
+            this.mnuD.Size = new System.Drawing.Size(150, 22);
+            this.mnuD.Text = "Puede hacer D";
+            // 
+            // mnuE
+            // 
+            this.mnuE.Name = "mnuE";
+            this.mnuE.Size = new System.Drawing.Size(150, 22);
+            this.mnuE.Text = "Puede hacer E";
+            // 
+            // mnuG
+            // 
+            this.mnuG.Name = "mnuG";
+            this.mnuG.Size = new System.Drawing.Size(150, 22);
+            this.mnuG.Text = "Puede hacer G";
+            // 
             // lblUsuario
             // 
             this.lblUsuario.Name = "lblUsuario";
@@ -221,6 +223,13 @@
             this.statusStrip.Size = new System.Drawing.Size(632, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
+            // 
+            // dAsignacionesToolStripMenuItem
+            // 
+            this.dAsignacionesToolStripMenuItem.Name = "dAsignacionesToolStripMenuItem";
+            this.dAsignacionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dAsignacionesToolStripMenuItem.Text = "2. D Asignaciones";
+            this.dAsignacionesToolStripMenuItem.Click += new System.EventHandler(this.dAsignacionesToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -274,6 +283,7 @@
         private System.Windows.Forms.ToolStripMenuItem reparacionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aprob;
         private System.Windows.Forms.ToolStripMenuItem idiomasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dAsignacionesToolStripMenuItem;
     }
 }
 

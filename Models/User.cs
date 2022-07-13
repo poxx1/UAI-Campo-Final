@@ -25,6 +25,7 @@ namespace Models
         public String Adress { get; set; }
         public int Tries { get; set; }
         public bool isBlocked { get; set; }
+        public bool isReparador {get; set;}
         public List<Component> Permissions
         {
             get
