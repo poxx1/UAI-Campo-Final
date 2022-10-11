@@ -23,6 +23,12 @@ namespace View
             cargarMaquinas();
         }
 
+        private void Approvals_Load(object sender, EventArgs e)
+        {
+            updateLanguage(Session.GetInstance.language);
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             //Calcula las horas y se la pasa a aprobaciones. La marco como revisada.
@@ -34,6 +40,7 @@ namespace View
 
             ms.Approval(m);
 
+            MessageBox.Show("Maquina desaprobada");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,9 +52,10 @@ namespace View
 
             m.isApproved = true;
 
-            ms.Approval(m);
             ms.AssingToEmployee(m);
             //Aca llamo al metodo que asigna las maquinas.
+
+            MessageBox.Show("Maquina aprobada");
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,7 +77,7 @@ namespace View
         {
             Machines m = new Machines();
             m = (Machines)comboBox1.SelectedItem;
-            if (m.isReviewed == true) { checkBox1.Checked = true; } else { checkBox1.Checked = false; }
+            if (m.isApproved == true) { checkBox1.Checked = true; } else { checkBox1.Checked = false; }
             return m;
         }
 
@@ -77,8 +85,26 @@ namespace View
         {
             Machines m = new Machines();
             m = (Machines)comboBox1.SelectedItem;
-            if (m.isReviewed == true) { checkBox1.Checked = true; } else { checkBox1.Checked = false; }
+            if (m.isApproved == true) { checkBox1.Checked = true; button1.Enabled = false;
+                button2.Enabled = false;
+            }
+            else { checkBox1.Checked = false; button1.Enabled = true;
+                button2.Enabled = true;
+            }
+
+            if(m.isReviewed !=true)
+            {
+                checkBox1.Checked = true; button1.Enabled = false;
+                button2.Enabled = false;
+            }
+            else
+            {
+                //checkBox1.Checked = false; button1.Enabled = true;
+                //button2.Enabled = true;
+            }
+
             richTextBox1.Text = m.Reparation;
+            getCurrent();
         }
         public void updateLanguage(Language language)
         {
@@ -115,5 +141,14 @@ namespace View
             }
         }
 
+        private void Approvals_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Session.GetInstance.removeObserber(this);
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+            button2.Enabled = true;
+        }
     }
 }

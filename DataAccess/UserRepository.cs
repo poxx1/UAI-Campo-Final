@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 using Utiles;
 
 namespace DataAccess
@@ -33,21 +34,27 @@ namespace DataAccess
                                     ,[Email]
                                     ,[key_idioma]
                                     ,[isBlocked]
-                                    ,[Tries])
+                                    ,[Tries]
+                                    ,[id_tipo])
                                     VALUES
                                     (@UserName
                                     ,@Password
                                     ,@Email
-                                    ,'ES'
-                                    ,0
-                                    ,0
+                                    ,@key_idioma
+                                    ,@isBlocked
+                                    ,@Tries
+                                    ,@Tipo
                                      )";
 
                     cmd.Connection = connection;
                     cmd.Transaction = transaction;
-                    cmd.Parameters.Add(new SqlParameter("UserName", user.Name));
+                    cmd.Parameters.Add(new SqlParameter("UserName", user.UserName));
                     cmd.Parameters.Add(new SqlParameter("Password", user.Password));
                     cmd.Parameters.Add(new SqlParameter("Email", user.Email));
+                    cmd.Parameters.Add(new SqlParameter("key_idioma", user.Language.ID));
+                    cmd.Parameters.Add(new SqlParameter("isBlocked", user.isBlocked));
+                    cmd.Parameters.Add(new SqlParameter("Tries", user.Tries));
+                    cmd.Parameters.Add(new SqlParameter("Tipo", user.Tipo));
 
                     cmd.ExecuteNonQuery();
 
@@ -55,7 +62,7 @@ namespace DataAccess
                     cmd.Connection = connection;
                     cmd.Transaction = transaction;
                     cmd.CommandText = $@"select * from Users where UserName = @Name;";
-                    cmd.Parameters.Add(new SqlParameter("Name", user.Name));
+                    cmd.Parameters.Add(new SqlParameter("Name", user.UserName));
                     SqlDataReader reader = cmd.ExecuteReader();
                     reader.Read();
                     user.Id = int.Parse(reader.GetValue(reader.GetOrdinal("id_usuario")).ToString());
@@ -108,6 +115,143 @@ namespace DataAccess
                 throw;
             }
         }
+
+        public bool CheckIfExistUserName(User user)
+        {
+            try
+            {
+                SqlConnection connection = ConnectionSingleton.getConnection();
+                connection.Open();
+                var cmd = new SqlCommand();
+                cmd.Connection = connection;
+
+                var sql = $@"select UserName from Users where UserName = '{user.UserName}'";
+
+                cmd.CommandText = sql;
+
+                var reader = cmd.ExecuteReader();
+
+                var lista = new List<string>();
+
+                while (reader.Read())
+                {
+
+                    try
+                    {
+                        string username = (string)reader.GetValue(reader.GetOrdinal("UserName"));
+
+                        lista.Add(username);
+                    }
+                    catch (Exception)
+                    {
+                        //Si aca salta la exception es porque no habia nada en la tabla
+                    }
+                  
+                }
+
+                reader.Close();
+                connection.Close();
+
+                if (lista.Count == 0)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al traer la lista de tipos de usuario");
+                throw ex;
+            }
+
+        }
+
+        public bool CheckIfExist(User user)
+        {
+            try
+            {
+                SqlConnection connection = ConnectionSingleton.getConnection();
+                connection.Open();
+                var cmd = new SqlCommand();
+                cmd.Connection = connection;
+
+                var sql = $@"select id_usuario from usuario_data where dni = {user.Dni}";
+
+                cmd.CommandText = sql;
+
+                var reader = cmd.ExecuteReader();
+
+                var lista = new List<int>();
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        int id = reader.GetInt32(reader.GetOrdinal("id_usuario"));
+
+                        lista.Add(id);
+                    }
+                    catch(Exception)
+                    {
+                        //Si aca salta la exception es porque no habia nada en la tabla
+                    }
+                }
+
+                reader.Close();
+                connection.Close();
+
+                if(lista.Count == 0)
+                return false;
+                else
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al traer la lista de tipos de usuario");
+                throw ex;
+            }
+
+            //return false;
+        }
+
+        public List<user_typeModel> GetAllTypes()
+        {
+            try
+            {
+                SqlConnection connection = ConnectionSingleton.getConnection();
+                connection.Open();
+                var cmd = new SqlCommand();
+                cmd.Connection = connection;
+
+                var sql = $@"select * from usuario_tipo;";
+
+                cmd.CommandText = sql;
+
+                var reader = cmd.ExecuteReader();
+
+                var lista = new List<user_typeModel>();
+
+                while (reader.Read())
+                {
+                    user_typeModel user = new user_typeModel()
+                    {
+                        id = int.Parse(reader.GetValue(reader.GetOrdinal("Id_tipo")).ToString()),
+                        desc = reader.GetValue(reader.GetOrdinal("Tipo_desc")).ToString(),
+                    };
+                    lista.Add(user);
+                }
+
+                reader.Close();
+                connection.Close();
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al traer la lista de tipos de usuario");
+                throw ex;
+            }
+        }
+
         public User Get(String Name)
         {
             User user = null;
@@ -186,8 +330,9 @@ namespace DataAccess
                     Adress = reader.GetValue(reader.GetOrdinal("direccion")).ToString(),
                     Phone = reader.GetValue(reader.GetOrdinal("telefono")).ToString(),
                     Dni = reader.GetValue(reader.GetOrdinal("dni")).ToString(),
+                    Tries = int.Parse(reader.GetValue(reader.GetOrdinal("Tries")).ToString()),
                     isBlocked = reader.GetBoolean(reader.GetOrdinal("isBlocked")),
-                    isReparador = reader.GetBoolean(reader.GetOrdinal("isReparador"))
+                    Tipo = int.Parse(reader.GetValue(reader.GetOrdinal("id_tipo")).ToString())
                 };
                 lista.Add(user);
             }
@@ -382,7 +527,7 @@ namespace DataAccess
             try
             {
                 connection.Open();
-                string query = $@"update Users set Blocked = 1 where id_usuario =@id";
+                string query = $@"update Users set isBlocked = 1 where id_usuario =@id";
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = query;

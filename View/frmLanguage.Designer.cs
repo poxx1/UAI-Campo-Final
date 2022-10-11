@@ -107,6 +107,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Agregar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -618,6 +619,7 @@
             this.button2.TabIndex = 70;
             this.button2.Text = "Guardar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox58
             // 
@@ -625,6 +627,7 @@
             this.textBox58.Name = "textBox58";
             this.textBox58.Size = new System.Drawing.Size(156, 20);
             this.textBox58.TabIndex = 71;
+            this.textBox58.TextChanged += new System.EventHandler(this.textBox58_TextChanged);
             // 
             // label7
             // 
@@ -654,7 +657,7 @@
             // 
             // textBox59
             // 
-            this.textBox59.Location = new System.Drawing.Point(645, 277);
+            this.textBox59.Location = new System.Drawing.Point(645, 268);
             this.textBox59.Name = "textBox59";
             this.textBox59.Size = new System.Drawing.Size(100, 20);
             this.textBox59.TabIndex = 75;
@@ -735,6 +738,7 @@
             this.Controls.Add(this.button1);
             this.Name = "frmLanguage";
             this.Text = "frmLanguage";
+            this.Load += new System.EventHandler(this.frmLanguage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

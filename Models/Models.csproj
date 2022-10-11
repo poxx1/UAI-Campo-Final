@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorModel.cs" />
     <Compile Include="enums\MachineType.cs" />
     <Compile Include="interfaces\ILanguageObserber.cs" />
     <Compile Include="interfaces\ILanguageObserbable.cs" />
@@ -54,6 +56,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="seguridad\Session.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="User_MachineModel.cs" />
+    <Compile Include="user_typeModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

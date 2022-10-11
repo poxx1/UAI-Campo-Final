@@ -26,20 +26,35 @@ namespace View
 
             foreach (User user in temp)
             {
-                if (user.isReparador)
+                if (user.Tipo == 1) //isReparador?
                 {
                     listReparadores.Add(user);
                 }
             }
 
             comboBox1.DataSource = listReparadores;
-            comboBox1.DisplayMember = "Id_User";
+            comboBox1.DisplayMember = "name";
             Session.GetInstance.addObserber(this);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int countHoras = 0;
+            List<User_MachineModel> listaM = new List<User_MachineModel>();
+            listaM = MachinesService.ListMachinesToRepair();
+            User us = new User();
+                us = (User)comboBox1.SelectedItem;
 
+            listBox1.Items.Clear();
+            foreach (User_MachineModel m in listaM)
+            {
+                if (m.Id_user == us.Id)
+                {
+                    countHoras += m.Time;
+                    listBox1.Items.Add(m);
+                }
+            }
+            textBox1.Text = countHoras.ToString();
         }
 
         #region Idioma
@@ -56,6 +71,11 @@ namespace View
                 }
             }
         }
+        private void Asignaciones_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Session.GetInstance.removeObserber(this);
+        }
+
         public void updateLanguageRecursiveControls(Language language, Control.ControlCollection parent)
         {
             foreach (Control control in parent)
@@ -72,9 +92,33 @@ namespace View
         }
         #endregion
 
+        private void Approvals_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Session.GetInstance.removeObserber(this);
+        }
+
         private void Asignaciones_Load(object sender, EventArgs e)
         {
 
+            updateLanguage(Session.GetInstance.language);
+
+            int countHoras = 0;
+            List<User_MachineModel> listaM = new List<User_MachineModel>();
+            listaM = MachinesService.ListMachinesToRepair();
+            User us = new User();
+            us = (User)comboBox1.SelectedItem;
+
+            listBox1.Items.Clear();
+            foreach (User_MachineModel m in listaM)
+            {
+                if (m.Id_user == us.Id)
+                {
+                    countHoras += m.Time;
+                    listBox1.Items.Add(m);
+                }
+            }
+            textBox1.Text = countHoras.ToString();
+            listBox1.DisplayMember = "Id_Machine";
         }
     }
 }

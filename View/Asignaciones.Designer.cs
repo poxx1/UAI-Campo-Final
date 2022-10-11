@@ -43,6 +43,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "2DReparador";
             this.label1.Text = "Reparador";
             // 
             // comboBox1
@@ -69,6 +70,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 3;
+            this.label2.Tag = "2DMaquinasTitulo";
             this.label2.Text = "Maquinas asignadas";
             // 
             // textBox1
@@ -85,6 +87,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(143, 13);
             this.label3.TabIndex = 5;
+            this.label3.Tag = "2DHorasTitulo";
             this.label3.Text = "Cantidad de horas ocupadas";
             // 
             // Asignaciones

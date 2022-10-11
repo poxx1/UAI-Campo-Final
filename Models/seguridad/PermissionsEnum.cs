@@ -26,6 +26,8 @@ namespace Models
         Presupuestar,
         Reparar,
         IngresarMaquina,
-        ModificarIdiomas
+        ModificarIdiomas,
+        CrearUsuario,
+        Asignacion
     }
 }

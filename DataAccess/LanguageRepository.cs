@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows.Forms;
 using Utiles;
 
 namespace DataAccess
@@ -45,6 +46,160 @@ namespace DataAccess
                 connection.Close();
                 throw;
             }
+        }
+       
+        //private SqlTransaction trans;
+        public void InsertNewLanguage(DataTable dt,string name)
+        {
+            //Language lang = new Language();
+            //try
+            //{
+            //    CreateLanguage(name);
+
+            //    lang = GetLanguage(name);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("No se pudo agregar a la tabla Idiomas");
+            //}
+
+            SqlConnection connection = ConnectionSingleton.getConnection();
+           
+            //try
+            //    {
+            //    //trans = connection.BeginTransaction("Trans");
+            //    connection.Open();
+            //        var cmd = new SqlCommand();
+            //        cmd.Connection = connection;
+
+            //        var sql = $@"delete from traduccion where id_idioma = {lang.ID};";
+
+            //        cmd.CommandText = sql;
+
+            //        SqlDataReader reader = cmd.ExecuteReader();
+
+            //        reader.Close();
+            //        connection.Close();
+            //    }
+            //    catch
+            //    {
+            //        connection.Close();
+            //        throw;
+            //    }
+
+                try
+                {
+                connection = ConnectionSingleton.getConnection();
+
+                connection.Open();                
+
+                    using (SqlBulkCopy bulkCopy = new SqlBulkCopy(connection))
+                    {
+                        foreach (DataColumn c in dt.Columns)
+                            bulkCopy.ColumnMappings.Add(c.ColumnName, c.ColumnName);
+
+                        bulkCopy.DestinationTableName = "traduccion";
+                        try
+                        {
+                            bulkCopy.WriteToServer(dt);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                    }
+                //trans.Commit();
+
+                connection.Close();
+            }
+                catch (Exception ex)
+                {
+                //if (trans != null) trans.Rollback();
+
+                connection.Close();
+                throw ex;
+                }
+            
+        }
+        public void saveLanguage(DataTable dt, int id)
+        {  
+            SqlConnection connection = ConnectionSingleton.getConnection();
+            try
+            {
+                //trans = connection.BeginTransaction("Trans");
+                connection.Open();
+                var cmd = new SqlCommand();
+                cmd.Connection = connection;
+
+                var sql = $@"delete from traduccion where id_idioma = {id};";
+
+                cmd.CommandText = sql;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                reader.Close();
+                connection.Close();
+            }
+            catch
+            {
+                connection.Close();
+                throw;
+            }
+
+            try
+            {
+                connection = ConnectionSingleton.getConnection();
+
+                connection.Open();
+
+                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(connection))
+                {
+                    foreach (DataColumn c in dt.Columns)
+                        bulkCopy.ColumnMappings.Add(c.ColumnName, c.ColumnName);
+
+                    bulkCopy.DestinationTableName = "traduccion";
+                    try
+                    {
+                        bulkCopy.WriteToServer(dt);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+                //trans.Commit();
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                //if (trans != null) trans.Rollback();
+
+                connection.Close();
+                throw ex;
+            }
+
+        }
+
+        private DataTable dataTable = new DataTable();
+
+        public DataTable GetLanguageDataTable(int ID)
+        {
+            //string connString = @"your connection string here";
+            string query = $"select * from traduccion where id_idioma = {ID.ToString()}";
+
+            SqlConnection conn = ConnectionSingleton.getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+
+            // create data adapter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            // this will query your database and return the result to your datatable
+            da.Fill(dataTable);
+            conn.Close();
+            da.Dispose();
+
+            return dataTable;
         }
 
         public void updateTranslation(string key, string value, Language language)
@@ -260,7 +415,7 @@ namespace DataAccess
             }
 
         }
-        public Language CreateLanguage(string name)
+        public void CreateLanguage(string name)
         {
             try
             {
@@ -276,11 +431,11 @@ namespace DataAccess
 
                 connection.Close();
 
-                return GetAllLanguagesWithoutTranslations().First(lang => lang.Name.Equals(name));
+                //return GetAllLanguagesWithoutTranslations().First(lang => lang.Name.Equals(name));
             }
             catch (Exception)
             {
-                throw new Exception("Ocurrio un error al crear");
+                throw new Exception("Ocurrio un error al crear el idioma");
             }
         }
         public DataSet GetDataSet()

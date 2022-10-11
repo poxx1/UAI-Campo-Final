@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models.interfaces;
 using Models.language;
+using DataAccess;
 
 namespace View
 {
@@ -155,6 +156,9 @@ namespace View
         {
             try
             {
+                PermissionsRepository permissionsRepository = new PermissionsRepository();
+                //permissionsRepository.
+
                 permissionsService.SaveFamily(seleccion);
                 MessageBox.Show("Family guardada correctamente");
             }
@@ -254,6 +258,11 @@ namespace View
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Approvals_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Session.GetInstance.removeObserber(this);
         }
     }
 }

@@ -72,7 +72,9 @@
             this.grpPatentes.Size = new System.Drawing.Size(557, 286);
             this.grpPatentes.TabIndex = 5;
             this.grpPatentes.TabStop = false;
+            this.grpPatentes.Tag = "1AUsuariosTitulo";
             this.grpPatentes.Text = "Usuarios";
+            this.grpPatentes.Enter += new System.EventHandler(this.grpPatentes_Enter);
             // 
             // resetPasswordBtn
             // 
@@ -81,6 +83,7 @@
             this.resetPasswordBtn.Name = "resetPasswordBtn";
             this.resetPasswordBtn.Size = new System.Drawing.Size(134, 32);
             this.resetPasswordBtn.TabIndex = 17;
+            this.resetPasswordBtn.Tag = "1AReiniciarPasswordButton";
             this.resetPasswordBtn.Text = "Reset Password";
             this.resetPasswordBtn.UseVisualStyleBackColor = false;
             this.resetPasswordBtn.Click += new System.EventHandler(this.resetPasswordBtn_Click);
@@ -93,6 +96,7 @@
             this.guardarPermisosBtn.Name = "guardarPermisosBtn";
             this.guardarPermisosBtn.Size = new System.Drawing.Size(137, 32);
             this.guardarPermisosBtn.TabIndex = 7;
+            this.guardarPermisosBtn.Tag = "1AGuardarButton";
             this.guardarPermisosBtn.Text = "Guardar cambios";
             this.guardarPermisosBtn.UseVisualStyleBackColor = false;
             this.guardarPermisosBtn.Click += new System.EventHandler(this.CmdGuardarFamilia_Click);
@@ -128,6 +132,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 11;
+            this.label3.Tag = "1AAgregarFamiliasTitulo";
             this.label3.Text = "Agregar Familias";
             // 
             // cboPatentes
@@ -151,6 +156,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 8;
+            this.label1.Tag = "1AAgregarPatentesTitulo";
             this.label1.Text = "Agregar patentes";
             // 
             // cmdConfigurar
@@ -161,6 +167,7 @@
             this.cmdConfigurar.Name = "cmdConfigurar";
             this.cmdConfigurar.Size = new System.Drawing.Size(234, 29);
             this.cmdConfigurar.TabIndex = 7;
+            this.cmdConfigurar.Tag = "1AConfigurarButton";
             this.cmdConfigurar.Text = "Configurar";
             this.cmdConfigurar.UseVisualStyleBackColor = false;
             this.cmdConfigurar.Click += new System.EventHandler(this.CmdConfigurar_Click);
@@ -186,6 +193,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 13);
             this.label2.TabIndex = 5;
+            this.label2.Tag = "1ATodosUsuariosTitulo";
             this.label2.Text = "Todos los usuarios";
             // 
             // eliminarPatenteBtn
@@ -196,6 +204,7 @@
             this.eliminarPatenteBtn.Name = "eliminarPatenteBtn";
             this.eliminarPatenteBtn.Size = new System.Drawing.Size(114, 43);
             this.eliminarPatenteBtn.TabIndex = 14;
+            this.eliminarPatenteBtn.Tag = "1AEliminarButton";
             this.eliminarPatenteBtn.Text = "Eliminar >>";
             this.eliminarPatenteBtn.UseVisualStyleBackColor = false;
             this.eliminarPatenteBtn.Click += new System.EventHandler(this.eliminarPatenteBtn_Click);
@@ -208,6 +217,7 @@
             this.eliminarFamiliaBtn.Name = "eliminarFamiliaBtn";
             this.eliminarFamiliaBtn.Size = new System.Drawing.Size(114, 38);
             this.eliminarFamiliaBtn.TabIndex = 15;
+            this.eliminarFamiliaBtn.Tag = "1AEliminarButton2";
             this.eliminarFamiliaBtn.Text = "Eliminar >>";
             this.eliminarFamiliaBtn.UseVisualStyleBackColor = false;
             this.eliminarFamiliaBtn.Click += new System.EventHandler(this.eliminarFamiliaBtn_Click);
@@ -220,6 +230,7 @@
             this.agregarPatenteBtn.Name = "agregarPatenteBtn";
             this.agregarPatenteBtn.Size = new System.Drawing.Size(117, 43);
             this.agregarPatenteBtn.TabIndex = 10;
+            this.agregarPatenteBtn.Tag = "1AAsignarButton";
             this.agregarPatenteBtn.Text = "Agregar >>";
             this.agregarPatenteBtn.UseVisualStyleBackColor = false;
             this.agregarPatenteBtn.Click += new System.EventHandler(this.AgregarPatente_Click);
@@ -232,6 +243,7 @@
             this.agregarFamiliaBtn.Name = "agregarFamiliaBtn";
             this.agregarFamiliaBtn.Size = new System.Drawing.Size(116, 38);
             this.agregarFamiliaBtn.TabIndex = 13;
+            this.agregarFamiliaBtn.Tag = "1AAsignarButton2";
             this.agregarFamiliaBtn.Text = "Agregar >>";
             this.agregarFamiliaBtn.UseVisualStyleBackColor = false;
             this.agregarFamiliaBtn.Click += new System.EventHandler(this.AgregarFamilia_Click);

@@ -100,6 +100,7 @@
             this.grpPatentes.Size = new System.Drawing.Size(256, 249);
             this.grpPatentes.TabIndex = 4;
             this.grpPatentes.TabStop = false;
+            this.grpPatentes.Tag = "1BPatentesTitulo";
             this.grpPatentes.Text = "Patentes";
             // 
             // groupBox5
@@ -111,6 +112,7 @@
             this.groupBox5.Size = new System.Drawing.Size(237, 137);
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
+            this.groupBox5.Tag = "1BDescripcionTitulo";
             this.groupBox5.Text = "Descripcion";
             this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
@@ -132,7 +134,7 @@
             this.eliminarPatenteBtn.Name = "eliminarPatenteBtn";
             this.eliminarPatenteBtn.Size = new System.Drawing.Size(95, 31);
             this.eliminarPatenteBtn.TabIndex = 9;
-            this.eliminarPatenteBtn.Tag = "eliminarG";
+            this.eliminarPatenteBtn.Tag = "1BRemoverButton";
             this.eliminarPatenteBtn.Text = "Eliminar >>";
             this.eliminarPatenteBtn.UseVisualStyleBackColor = false;
             this.eliminarPatenteBtn.Click += new System.EventHandler(this.eliminarPatenteBtn_Click);
@@ -146,7 +148,7 @@
             this.cmdAgregarPatente.Name = "cmdAgregarPatente";
             this.cmdAgregarPatente.Size = new System.Drawing.Size(95, 32);
             this.cmdAgregarPatente.TabIndex = 8;
-            this.cmdAgregarPatente.Tag = "agregarG";
+            this.cmdAgregarPatente.Tag = "1BAgregarButton";
             this.cmdAgregarPatente.Text = "Agregar >> ";
             this.cmdAgregarPatente.UseVisualStyleBackColor = false;
             this.cmdAgregarPatente.Click += new System.EventHandler(this.CmdAgregarPatente_Click);
@@ -173,6 +175,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 13);
             this.label2.TabIndex = 5;
+            this.label2.Tag = "1BTodasPatentesTitulo";
             this.label2.Text = "Todas las patentes";
             // 
             // groupBox1
@@ -239,6 +242,7 @@
             this.groupBox2.Size = new System.Drawing.Size(258, 249);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Tag = "1BFamiliasTitulo";
             this.groupBox2.Text = "Familias";
             // 
             // eliminarFamiliaBtn
@@ -250,7 +254,7 @@
             this.eliminarFamiliaBtn.Name = "eliminarFamiliaBtn";
             this.eliminarFamiliaBtn.Size = new System.Drawing.Size(98, 29);
             this.eliminarFamiliaBtn.TabIndex = 13;
-            this.eliminarFamiliaBtn.Tag = "eliminarG";
+            this.eliminarFamiliaBtn.Tag = "1BRemoverButton2";
             this.eliminarFamiliaBtn.Text = "Eliminar >>";
             this.eliminarFamiliaBtn.UseVisualStyleBackColor = false;
             this.eliminarFamiliaBtn.Click += new System.EventHandler(this.eliminarFamiliaBtn_Click);
@@ -276,7 +280,7 @@
             this.cmdSeleccionar.Name = "cmdSeleccionar";
             this.cmdSeleccionar.Size = new System.Drawing.Size(98, 27);
             this.cmdSeleccionar.TabIndex = 11;
-            this.cmdSeleccionar.Tag = "configurarG";
+            this.cmdSeleccionar.Tag = "1BConfigurarButton";
             this.cmdSeleccionar.Text = "Configurar";
             this.cmdSeleccionar.UseVisualStyleBackColor = false;
             this.cmdSeleccionar.Visible = false;
@@ -291,7 +295,7 @@
             this.cmdAgregarFamilia.Name = "cmdAgregarFamilia";
             this.cmdAgregarFamilia.Size = new System.Drawing.Size(98, 29);
             this.cmdAgregarFamilia.TabIndex = 10;
-            this.cmdAgregarFamilia.Tag = "agregarG";
+            this.cmdAgregarFamilia.Tag = "1BAgregarButton2";
             this.cmdAgregarFamilia.Text = "Agregar >>";
             this.cmdAgregarFamilia.UseVisualStyleBackColor = false;
             this.cmdAgregarFamilia.Click += new System.EventHandler(this.CmdAgregarFamilia_Click);
@@ -309,6 +313,7 @@
             this.groupBox3.Size = new System.Drawing.Size(232, 93);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
+            this.groupBox3.Tag = "1BNuevaFamiliaTitulo";
             this.groupBox3.Text = "Nueva";
             // 
             // button1
@@ -320,7 +325,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(56, 28);
             this.button1.TabIndex = 4;
-            this.button1.Tag = "guardarG";
+            this.button1.Tag = "1BGuardarButton";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
@@ -341,6 +346,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 2;
+            this.label5.Tag = "1BNombreTitulo";
             this.label5.Text = "Nombre";
             // 
             // cboFamilias
@@ -364,6 +370,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 13);
             this.label4.TabIndex = 7;
+            this.label4.Tag = "1BTodasFamiliasTitulo";
             this.label4.Text = "Todas las familias";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
@@ -380,6 +387,7 @@
             this.groupBox4.Size = new System.Drawing.Size(290, 249);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
+            this.groupBox4.Tag = "1BConfigurarFamiliaTitulo";
             this.groupBox4.Text = "Configurar Familia";
             // 
             // cmdGuardarFamilia
@@ -391,6 +399,7 @@
             this.cmdGuardarFamilia.Name = "cmdGuardarFamilia";
             this.cmdGuardarFamilia.Size = new System.Drawing.Size(110, 26);
             this.cmdGuardarFamilia.TabIndex = 1;
+            this.cmdGuardarFamilia.Tag = "1BGuardarFamilia";
             this.cmdGuardarFamilia.Text = "Guardar familia";
             this.cmdGuardarFamilia.UseVisualStyleBackColor = false;
             this.cmdGuardarFamilia.Click += new System.EventHandler(this.Button2_Click);

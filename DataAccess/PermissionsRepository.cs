@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Utiles;
 
 namespace DataAccess
@@ -41,6 +42,11 @@ namespace DataAccess
                 cnn.Close();
                 return component;
             }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show("Error en la consulta a la base de datos");
+                throw ex;
+            }
             catch (Exception e)
             {
                 throw e;
@@ -50,8 +56,10 @@ namespace DataAccess
         {
             if (!IsValidFamily(family))
             {
+                MessageBox.Show("La familia es recursiva");
                 throw new Exception("Familia Recursiva");
             }
+
             try
             {
                 var cnn = ConnectionSingleton.getConnection();
@@ -90,39 +98,42 @@ namespace DataAccess
         }
         private Boolean IsValidFamily(Family family)
         {
-            foreach(Component child in family.Childs)
+            bool toReturn = true;
+            foreach (Component child in family.Childs)
             {
                 if (child.GetType() == typeof(Family))
                 {
                     if (family.Nombre.Equals(child.Nombre))
                     {
-                        return false;
+                        toReturn = false;
                     }
                     else
                     {
-                        return ValidateFamilyRecursion((Family)child, family);
+                        if (!ValidateFamilyRecursion((Family)child, family)) toReturn = false;
                     }
                 }
             }
-            return true;
+            return toReturn;
         }
-        private Boolean ValidateFamilyRecursion(Family family,Family original)
+        private Boolean ValidateFamilyRecursion(Family family, Family original)
         {
+            bool toReturn = true;
+
             foreach (Component child in family.Childs)
             {
                 if (child.GetType() == typeof(Family))
                 {
                     if (original.Nombre.Equals(child.Nombre))
                     {
-                        return false;
+                        toReturn = false;
                     }
                     else
                     {
-                        return ValidateFamilyRecursion((Family)child, original);
+                        if (!ValidateFamilyRecursion((Family)child, family)) toReturn = false;
                     }
                 }
             }
-            return true;
+            return toReturn;
         }
         public List<Patent> GetAllPatents()
         {
@@ -220,7 +231,7 @@ namespace DataAccess
 
             List<Component> lista = new List<Component>();
 
-            while (reader.Read())
+            while (reader.Read()) // Validar la recursividad de nuevo
             {
                 int id_padre = 0;
                 if (reader["id_permiso_padre"] != DBNull.Value)

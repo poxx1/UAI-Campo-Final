@@ -22,5 +22,6 @@ namespace Models
         public bool isApproved {get;set;}
         public bool isReviewed{get;set;}
         public bool isPossibleToRepair {get;set;}
+        public int Hours { get; set; }
     }
 }

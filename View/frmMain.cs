@@ -25,7 +25,8 @@ namespace View
         private void languageChange_click(object sender, EventArgs e)
         {
             Language language =(Language)((ToolStripMenuItem)sender).Tag;
-            Session.GetInstance.language = languageService.GetLanguage(language.Name);
+            //Le seteo por default ESP
+            Session.GetInstance.language = languageService.GetLanguage(language.Name); //language.Name
 
             this.lblUsuario.Text = language.Name;
         }
@@ -34,25 +35,9 @@ namespace View
         {
             if (Session.GetInstance.IsLoggedIn())
             {
-                this.mnuEjemplo.Visible = Session.GetInstance.IsInRole(PermissionsEnum.PuedeHacerF);
-                this.mnuA.Enabled = Session.GetInstance.IsInRole(PermissionsEnum.Default);
-                this.mnuB.Enabled = Session.GetInstance.IsInRole(PermissionsEnum.Patentes);
-                this.mnuC.Enabled = Session.GetInstance.IsInRole(PermissionsEnum.Usuarios);
-                this.mnuD.Enabled = Session.GetInstance.IsInRole(PermissionsEnum.PuedeHacerD);
-                this.mnuE.Enabled = Session.GetInstance.IsInRole(PermissionsEnum.PuedeHacerE);
-                this.mnuG.Enabled = Session.GetInstance.IsInRole(PermissionsEnum.PuedeHacerG);
-
             }
             else
             {
-                this.mnuEjemplo.Enabled = false;
-                this.mnuA.Enabled = false;
-                this.mnuB.Enabled = false;
-                this.mnuC.Enabled = false;
-                this.mnuD.Enabled = false;
-                this.mnuE.Enabled = false;
-                this.mnuG.Enabled = false;
-
             }
         }
 
@@ -62,11 +47,21 @@ namespace View
             
             loginForm = parent;
             sesionService = new SessionService();
-            languageService = new LanguageService();
             userService = new UserService();
+
             Session.GetInstance.addObserber(this);
 
+            ValidarPermisos();
+            cargarComboIdiomas();
+        }
+        public void cargarComboIdiomas()
+        {
+            languageService = new LanguageService();
+
             List<Language> languages = languageService.GetLanguagesForCombo();
+
+            mnuSelectIdioma.DropDownItems.Clear();
+
             foreach (Language item in languages)
             {
                 ToolStripMenuItem t = new ToolStripMenuItem(item.Name);
@@ -75,7 +70,6 @@ namespace View
                 t.Click += languageChange_click;
                 mnuSelectIdioma.DropDownItems.Add(t);
             }
-            ValidarPermisos();
         }
 
         private void SeguridadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,23 +113,32 @@ namespace View
         private void VentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            try
-            {
-                VentasServiece ventasServiece = new VentasServiece();
-                ventasServiece.Facturar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+            //try
+            //{
+            //    //VentasServiece ventasServiece = new VentasServiece();
+            //    //ventasServiece.Facturar();
+            //}
+            //catch (Exception ex)
+            ////{
+            ////    MessageBox.Show(ex.Message);
                 
-            }
+            //}
 
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             updateLanguage(Session.GetInstance.language);
-        }
+            label1.Text = Session.GetInstance.usuario.Name.ToString();
+
+            if (label1.Text == "admin")
+            {
+                Form frm = new frmGerente();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+
+          }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -145,8 +148,9 @@ namespace View
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             Session.GetInstance.removeObserber(this);
-            loginForm.Show();
+
             sesionService.Logout();
+            Application.Exit();
         }
 
         private void createForm(Type formType)
@@ -160,7 +164,6 @@ namespace View
                 }
             }
            
-
             Form frm = (Form) Activator.CreateInstance(formType);
             frm.MdiParent = this;
             frm.Show();
@@ -222,6 +225,8 @@ namespace View
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Session.GetInstance.removeObserber(this);
+            sesionService.Logout();
             Application.Exit();
         }
 
@@ -247,7 +252,6 @@ namespace View
             {
                 MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
             }
-          
         }
 
         private void aprobacionesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,7 +272,7 @@ namespace View
         {
             if (Session.GetInstance.IsInRole(PermissionsEnum.ModificarIdiomas))
             {
-                Form frm = new frmLanguage();
+                Form frm = new testLanguage();
                 frm.MdiParent = this;
                 frm.Show();
             }
@@ -285,18 +289,56 @@ namespace View
 
         private void dAsignacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new Asignaciones();
-            frm.MdiParent = this;
-            frm.Show();
-
-            if (Session.GetInstance.IsInRole(PermissionsEnum.ModificarIdiomas))
+            if (Session.GetInstance.IsInRole(PermissionsEnum.Asignacion)) //CAMBIAR EL ROL
             {
-               
+                Form frm = new Asignaciones();
+                frm.MdiParent = this;
+                frm.Show();
             }
             else
             {
                 MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
             }
+        }
+
+        private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          
+
+            if (Session.GetInstance.IsInRole(PermissionsEnum.CrearUsuario)) //CAMBIAR EL ROL
+            {
+                Form frm = new frmCreateUser();
+                //Form frm = new testLanguage();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para ingresar a este fomrulario");
+            }
+        }
+
+        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void fCalculadoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmCalculadora();
+            //Form frm = new testLanguage();
+            frm.MdiParent = this;
+            frm.Show();
+
+        }
+
+        private void eDashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmGerente();
+            //Form frm = new testLanguage();
+            frm.MdiParent = this;
+            frm.Show();
+
         }
     }
 } 

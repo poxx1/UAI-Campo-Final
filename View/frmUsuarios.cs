@@ -8,20 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Models.interfaces;
+using Models.language;
 
 namespace View
 {
-    public partial class frmUsuarios : Form
+    public partial class frmUsuarios : Form, ILanguageObserber
     {
-        private UserService userService;
-        private PermissionsService permissionsService;
+        PermissionsService permissionsService;
+        //Family seleccion;
+        UserService userService = new UserService();
+
         private User user;
 
         public frmUsuarios()
         {
-            InitializeComponent();  
+            InitializeComponent();
+            Session.GetInstance.addObserber(this);
+            permissionsService = new PermissionsService();
         }
-
 
         void LlenarTreeView(TreeNode padre, Component c)
         {
@@ -139,7 +144,9 @@ namespace View
 
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
-            userService = new UserService();
+            updateLanguage(Session.GetInstance.language);
+
+            UserService userService = new UserService();
             permissionsService = new PermissionsService();
             this.cboUsuarios.DataSource = userService.GetAll();
             cboUsuarios.DisplayMember = "Name";
@@ -231,9 +238,56 @@ namespace View
         private void resetPasswordBtn_Click(object sender, EventArgs e)
         {
             userService.ResetPassword(user);
+
+            MessageBox.Show("La password solicitada fue reseteada!");
         }
 
         private void cboUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmUsuarios_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Session.GetInstance.removeObserber(this);
+        }
+
+        public void updateLanguage(Language language)
+        {
+            try
+            {
+                foreach (Control control in Controls)
+                {
+                    control.Text = language.Translations.Find(
+                            (translation) => translation.Key.Equals(control.Tag)
+                        )?.Translate ?? control.Text;
+                    if (control.Controls.Count != 0)
+                    {
+                        updateLanguageRecursiveControls(language, control.Controls);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void updateLanguageRecursiveControls(Language language, Control.ControlCollection parent)
+        {
+            foreach (Control control in parent)
+            {
+                control.Text = language.Translations.Find(
+                        (translation) => translation.Key.Equals(control.Tag)
+                    )?.Translate ?? control.Text;
+
+                if (control.Controls.Count != 0)
+                {
+                    updateLanguageRecursiveControls(language, control.Controls);
+                }
+            }
+        }
+
+        private void grpPatentes_Enter(object sender, EventArgs e)
         {
 
         }

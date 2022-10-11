@@ -54,5 +54,10 @@ namespace View
         {
             textBox1.Focus();
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se deben seguir las siguientes reglas a la hora de crear una contraseña: \r\n 1. Debe contar con al menos 8 caracteres. \r\n 2. No debe contener solo letras \r\n NOTA: Todo usuario que incumpla las politicas mencionadas sera penado por la compania.","Politicas olbigatorias",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
     }
 }

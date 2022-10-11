@@ -14,22 +14,45 @@ using Models.language;
 
 namespace View
 {
-    public partial class frmLanguage : Form, ILanguageObserber
+    public partial class frmCalculadora : Form, ILanguageObserber
     {
         //PermissionsService permissionsService;
         //Family seleccion;
-        public frmLanguage()
+        UserService userService = new UserService();
+        public frmCalculadora()
         {
             InitializeComponent();
+            Session.GetInstance.addObserber(this);
         }
 
-        private void frmLanguage_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (textBox1.Text != "" && textBox2.Text != "" && textBox1.Text != "0" && textBox2.Text != "" && !textBox1.Text.Contains('-') && !textBox2.Text.Contains('-'))
+                {
+                    float a = float.Parse(textBox1.Text);
+                    float b = float.Parse(textBox2.Text);
+                    float c = a * b;
+                    label4.Text = c.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("No incluir 0s, campos vacios ni numeros negativos en la cuenta");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo realizar el calculo, revisar los datos ingresados");
+            }
+        }
+
+        private void frmCalculadora_Load(object sender, EventArgs e)
         {
             updateLanguage(Session.GetInstance.language);
 
         }
-
-        private void frmLanguage_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmCalculadora_FormClosed(object sender, FormClosedEventArgs e)
         {
             Session.GetInstance.removeObserber(this);
         }
@@ -68,21 +91,5 @@ namespace View
             }
         }
 
-        private void textBox58_TextChanged(object sender, EventArgs e)
-        {
-            string nombreNuevoIdioma = textBox58.Text;
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Guardo en la BD el nuevo idioma
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //Guardo los cambios del idioma en la bd
-        }
     }
 }

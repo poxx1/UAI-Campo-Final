@@ -6,14 +6,13 @@ namespace Utiles
 {
     public class DBConnection
     {
-
         string connectionString = Properties.Resources.ConnectionString;
-        public bool Insert(string query) 
+        public bool query(string query) 
         {
             var objeto = new object();
             var objeto1 = new object();
 
-            var cn = new SqlConnection(@"Server=DESKTOP-H982BU0\SQLEXPRESS; Initial Catalog=LastraJulianDev;Integrated Security=True");
+            var cn = new SqlConnection(@"Server=DESKTOP-CUHS3KR\SQLEXPRESS; Initial Catalog=campo;Integrated Security=True");
             var cmd = new SqlCommand();
 
             cn.Open();
